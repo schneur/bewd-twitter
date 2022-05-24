@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get '/feeds'                    => 'feeds#index'
 
   # USERS
-  post '/users', to: 'users#create'
+  post '/users' => 'users#create'
 
 
   # SESSIONS

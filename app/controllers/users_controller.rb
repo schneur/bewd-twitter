@@ -1,11 +1,14 @@
 class UsersController < ApplicationController
+
+  skip_before_action :verify_authenticity_token
+
   def create
-    @user = User.new{username: params[:username], email: params[:email], password: params[:password]}
+    @user = User.new(user_params)
 
     if @user.save
       render json: {
         user: {
-          username: @user.username
+          username: @user.username,
           email: @user.email
         }
       }
@@ -19,6 +22,7 @@ class UsersController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:password, :username)
+      params.require(:user).permit(:password, :username, :email)
     end
+    
 end
